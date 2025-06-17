@@ -1,20 +1,38 @@
 students = []
 
 def add_student():
-    """
-    TODO: Prompt the user to enter student name, age, and grade.
-    Append the student as a dictionary to the students list.
-    """
-    pass
+    name = input("Enter student name: ")
+    age = input("Enter student age: ")
+    try:
+        grade = float(input("Enter student grade: "))
+    except ValueError:
+        print("Invalid grade. Please enter a number.")
+        return
+    
+    student = {
+        "name": name,
+        "age": age,
+        "grade": grade
+    }
+    students.append(student)
+    print(f"Student {name} added successfully!\n")
 
 def view_students():
-    """
-    TODO: Loop through the students list and print each student's info.
-    """
-    pass
+   if not students:
+        print("No students in the system.\n")
+        return
+
+    print("\nList of Students:")
+    for idx, student in enumerate(students, start=1):
+        print(f"{idx}. Name: {student['name']}, Age: {student['age']}, Grade: {student['grade']}")
+        print()
 
 def get_average_grade():
-    """
-    TODO: Return the average grade of all students.
-    """
-    pass
+    if not students:
+        print("No student data to calculate average.\n")
+        return
+
+    total = sum(student['grade'] for student in students)
+    average = total / len(students)
+    print(f"Average Grade: {average:.2f}\n")
+ 
